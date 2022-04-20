@@ -46,8 +46,8 @@ function calculate(element){
             dis.innerText="";
             break;
         case 'poi':
-            p2.innerText=dis.innerText+'.';
-            dis.innerText="";
+            dis.innerText=dis.innerText+'.';
+            document.getElementById(poi).disabled=true;
             break;
         case 'equ':
             if(exp==-1&&p2.innerText&&!dis.innerText&&p2.innerText!="Invalid"){dis.innerText=p2.innerText;p2.innerText="";}
@@ -98,19 +98,19 @@ function equal(){
     str=str.split(exp);
     switch(exp){
         case '+':
-            res=parseInt(str[0])+parseInt(str[1]);
+            res=parseFloat(str[0])+parseFloat(str[1]);
             break;
         case '-':
-            res=parseInt(str[0])-parseInt(str[1]);
+            res=parseFloat(str[0])-parseFloat(str[1]);
             break;
         case 'x':
-            res=parseInt(str[0])*parseInt(str[1]);
+            res=parseFloat(str[0])*parseFloat(str[1]);
             break;
         case '÷':
-            res=parseInt(str[0])/parseInt(str[1]);
+            res=parseFloat(str[0])/parseFloat(str[1]);
             break;
         case '%':
-            res=parseInt(str[0])%parseInt(str[1]);
+            res=parseFloat(str[0])%parseFloat(str[1]);
             break;
     }
     exp=-1;
