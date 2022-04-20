@@ -21,40 +21,44 @@ function calculate(element){
             dis.innerText = dis.innerText.substr(0, dis.innerText.length - 1);
             break;
         case 'per':
-            p2.innerText=dis.innerText+' %';
+            check();
+            p2.innerText=res +' %';
             dis.innerText="";
             exp='%';
             break;
         case 'divi':
-            p2.innerText=dis.innerText+' ÷';
+            check();
+            p2.innerText=res+' ÷';
             exp='÷';
             dis.innerText="";
             break;
         case 'plu':
-            p2.innerText=dis.innerText+ ' +';
+            check();
+            p2.innerText=res+ ' +';
             exp='+';
             dis.innerText="";
             break;
         case 'min':
-            p2.innerText=dis.innerText+ ' -';
+            check();
+            p2.innerText=res+ ' -';
             exp='-';
             dis.innerText="";
             break;
         case 'mul':
-            p2.innerText=dis.innerText+' x';
+            check();
+            p2.innerText=res+' x';
             exp='x';
             dis.innerText="";
             break;
         case 'poi':
             dis.innerText=dis.innerText+'.';
-            document.getElementById(poi).disabled=true;
+            document.getElementById("poi").disabled=true;
             break;
         case 'equ':
-            if(exp==-1&&p2.innerText&&!dis.innerText&&p2.innerText!="Invalid"){dis.innerText=p2.innerText;p2.innerText="";}
+            if(exp==-1&&p2.innerText&&!dis.innerText&&p2.innerText!="Invalid"){dis.innerText=p2.innerText;p2.innerText="";}else if(exp==-1&&dis.innerText&&!p2.innerText) break;
             else{equal();
-            if(isNaN(res)) {res="Invalid";}
-            else if(res%1){
-                res=res.toFixed(3);}
+            if(isNaN(res)||res=="Infinity"){res="Invalid";}
+            else 
             p2.innerText=res;
             dis.innerText="";}
             break;
@@ -93,7 +97,7 @@ function calculate(element){
 }
 
 function equal(){
-
+    if(exp==-1) return ;
     let str=document.querySelector('.p2').innerText+document.querySelector('.dis').innerText;
     str=str.split(exp);
     switch(exp){
@@ -114,4 +118,20 @@ function equal(){
             break;
     }
     exp=-1;
+}
+
+function check(){
+    if(exp!=-1){
+        let m=document.querySelector(".p2").innerText;
+        let n=document.querySelector(".dis").innerText;
+        if(!n) return;
+        document.querySelector(".p2").innerText=m+n;
+        document.querySelector(".dis").innerText="";
+        equal();
+        if(res%1){
+            res=res.toFixed(2);}
+    }
+    else {
+        res=document.querySelector('.dis').innerText;
+    }
 }
