@@ -10,41 +10,53 @@ button.forEach(element => {
 function calculate(element){
     let inp=element.getAttribute('id');
     let dis=document.querySelector('.dis');
+    let p2=document.querySelector('.p2');
     switch(inp){
         case 'clear':
             dis.innerText="";
+            p2.innerText="";
+            res="";
             break;
         case 'back':
             dis.innerText = dis.innerText.substr(0, dis.innerText.length - 1);
             break;
         case 'per':
-            dis.innerText=dis.innerText+'%';
+            p2.innerText=dis.innerText+' %';
+            dis.innerText="";
             exp='%';
             break;
         case 'divi':
-            dis.innerText=dis.innerText+'÷';
+            p2.innerText=dis.innerText+' ÷';
             exp='÷';
+            dis.innerText="";
             break;
         case 'plu':
-            dis.innerText=dis.innerText+'+';
+            p2.innerText=dis.innerText+ ' +';
             exp='+';
+            dis.innerText="";
             break;
         case 'min':
-            dis.innerText=dis.innerText+'-';
+            p2.innerText=dis.innerText+ ' -';
             exp='-';
+            dis.innerText="";
             break;
         case 'mul':
-            dis.innerText=dis.innerText+'x';
-            exp='x'
+            p2.innerText=dis.innerText+' x';
+            exp='x';
+            dis.innerText="";
             break;
         case 'poi':
-            dis.innerText=dis.innerText+'.';
+            p2.innerText=dis.innerText+'.';
+            dis.innerText="";
             break;
         case 'equ':
-            equal();
-            if(res%1){
+            if(exp==-1&&p2.innerText&&!dis.innerText&&p2.innerText!="Invalid"){dis.innerText=p2.innerText;p2.innerText="";}
+            else{equal();
+            if(isNaN(res)) {res="Invalid";}
+            else if(res%1){
                 res=res.toFixed(3);}
-            dis.innerText=res;
+            p2.innerText=res;
+            dis.innerText="";}
             break;
         case 'sev':
             dis.innerText=dis.innerText+'7';
@@ -81,7 +93,8 @@ function calculate(element){
 }
 
 function equal(){
-    let str=document.querySelector('.dis').innerText;
+
+    let str=document.querySelector('.p2').innerText+document.querySelector('.dis').innerText;
     str=str.split(exp);
     switch(exp){
         case '+':
