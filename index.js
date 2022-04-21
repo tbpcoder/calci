@@ -16,6 +16,7 @@ function calculate(element){
             dis.innerText="";
             p2.innerText="";
             res="";
+            exp=-1;
             break;
         case 'back':
             dis.innerText = dis.innerText.substr(0, dis.innerText.length - 1);
@@ -55,6 +56,7 @@ function calculate(element){
             document.getElementById("poi").disabled=true;
             break;
         case 'equ':
+            if(exp!=-1&&!dis.innerText&&p2.innerText) break;
             if(exp==-1&&p2.innerText&&!dis.innerText&&p2.innerText!="Invalid"){dis.innerText=p2.innerText;p2.innerText="";}else if(exp==-1&&dis.innerText&&!p2.innerText) break;
             else{equal();
             if(isNaN(res)||res=="Infinity"){res="Invalid";}
